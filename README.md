@@ -13,7 +13,7 @@ To get started clone this repo and your main file will have a basic starter Proj
 You will need to have raylib installed!
 
 ```bash
-pip install raylib
+pip3 install -r "requirements.txt"
 ```
 
 ### Usage
