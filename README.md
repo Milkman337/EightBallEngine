@@ -1,5 +1,7 @@
 # EightBallEngine
 
+Discord: https://discord.gg/TN2s7cmfXK
+
 Do you want to create games in python with only code but your projects are getting cluttered. Then you’ve come to the right place. I decided to make my own game engine because I had this exact problem. Also this GameEngine is based on raylib-python-cffi. It’s currently setup for pixel art games with a resolution of 320 by 180. Custom resolutions are in progrss.
 
 ## Getting Started
