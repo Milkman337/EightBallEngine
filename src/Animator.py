@@ -5,6 +5,18 @@ from src.Camera import camera
 
 class animaton:
     def __init__(self, speed:float, texture:Texture2D, gameObject:gameObject, name:str):
+        """
+        Initializes the animation
+
+        Args:
+            self (animation): Instance of the animation.\n
+            speed (float): The speed at wich the animation is played.\n
+            texture (Texture2D): The texture of the animation.\n
+            gameObject (gameObject): The parent gameObject of the animation(animator).\n
+
+        Returns:
+            None
+        """
         self.name = name
         self.gameObject = gameObject
         self.speed = speed
@@ -18,6 +30,16 @@ class animaton:
         
 
     def update(self, dt: float):
+        """
+        Updates the animation.
+
+        Args:
+            self (animation): Instance of the animation.\n
+            dt (float): deltaTime.\n
+
+        Returns:
+            None
+        """
         begin_texture_mode(self.between)
         clear_background(Color(0,0,0,0))
         draw_texture_rec(self.texture, self.frame_rec, Vector2(0,0), WHITE)
@@ -31,7 +53,15 @@ class animaton:
             self.frame_rec.x=self.texture.height*self.frame
 
     def render(self):
-                
+        """
+        Renders the animation.
+
+        Args:
+            self (animation): Instance of the animation.\n
+
+        Returns:
+            None
+        """
         draw_texture_pro(self.between.texture,
                          Rectangle(0,0,self.between.texture.width*self.mirror, -self.between.texture.height),
                          Rectangle(self.gameObject.position.x,
@@ -45,12 +75,33 @@ class animaton:
 class animator(component):
     def __init__(self, gameObject: gameObject,
                  speed:float=8):
+        """
+        Initializes the animator.
+
+        Args:
+            self (animator): The animator.\n
+            gameObject (gameObject): The parent gameObject of the animator.\n
+            speed (float): Speed of the animations.\n
+
+        Returns:
+            None
+        """
         super().__init__(gameObject)
         self.speed = speed
         self.selected:str = "None"
         self.animations:list[animaton]=[animaton(self.speed, load_texture("assets/animations/None.png"), self.gameObject, "None")]
 
     def mirror(self, mirror:bool):
+        """
+        Mirrors the active animation.
+
+        Args:
+            self (animator): The animator.\n
+            mirror (bool): This sets if the animation should be mirrored.\n
+
+        Returns:
+            None
+        """
         for a in self.animations:
             if mirror:
                 a.mirror=-1
