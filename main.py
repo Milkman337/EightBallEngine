@@ -15,7 +15,7 @@ import src.Engine as engine
 
 # ---ADD YOUR CUSTOM SCRIPTS HERE---
 
-# ----------------------------------
+# -----------------------------------
 
 init_window(1280, 720, "Game Engine")
 
