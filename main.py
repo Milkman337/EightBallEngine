@@ -9,22 +9,23 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
+from src.RectangleRenderer import *
 
 from pyray import *
 import src.Engine as engine
 
-# ---ADD YOUR CUSTOM SCRIPTS HERE---
+window_width = 1280
+window_height = 720
 
-# ----------------------------------
-
-init_window(1280, 720, "Game Engine")
-
+init_window(window_width, window_height, "Game Engine")
 main_scene = scene("Main Scene", active=True)
 
-#main_scene.load()
 cam_go = gameObject(main_scene, name="Camera")
 cam = camera(cam_go)
-debugMovement(cam_go, 100)
+
+
+rectangle = gameObject(main_scene, name="Rect")
+rec = RectangleObject(rectangle, position=Vector2(10, 10), scale=Vector2(20,20), active=True, tint=YELLOW)
 
 def update():
     main_scene.update(get_frame_time())
