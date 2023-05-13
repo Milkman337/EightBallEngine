@@ -25,9 +25,10 @@ cam = camera(cam_go)
 
 
 rectangle = gameObject(main_scene, name="Rect")
-rec = rectangleRenderer(rectangle, position=Vector2(10, 10), scale=Vector2(20,20), active=True, tint=YELLOW)
+rec = rectangleRenderer(rectangle, Vector2(20,20), RED)
 
 def update():
+    rectangle.rotation += 10 * get_frame_time()
     main_scene.update(get_frame_time())
 
 def render():
