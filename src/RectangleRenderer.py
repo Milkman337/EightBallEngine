@@ -3,7 +3,7 @@ from src.Component import component
 from pyray import *
 
 from src.GameObject import gameObject
-class RectangleObject(component):
+class rectangleRenderer(component):
     def __init__(self,
                  gameObject: gameObject,
                  position:Vector2=Vector2(0,0),

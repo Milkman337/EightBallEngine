@@ -9,7 +9,7 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
-from src.RectangleRenderer import *
+from src.RectangleRenderer import rectangleRenderer
 
 from pyray import *
 import src.Engine as engine
@@ -25,7 +25,7 @@ cam = camera(cam_go)
 
 
 rectangle = gameObject(main_scene, name="Rect")
-rec = RectangleObject(rectangle, position=Vector2(10, 10), scale=Vector2(20,20), active=True, tint=YELLOW)
+rec = rectangleRenderer(rectangle, position=Vector2(10, 10), scale=Vector2(20,20), active=True, tint=YELLOW)
 
 def update():
     main_scene.update(get_frame_time())
