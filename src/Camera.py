@@ -14,6 +14,7 @@ class camera(component):
         Returns:
             None
         """
+        self.resolution = Vector2(320,180)
         self.gameObject = gameObject
         self.offset = Vector2(0,0)
         self.zoom = 1
@@ -35,8 +36,8 @@ class camera(component):
         """
         if self.lerp:
             # Calculate the target position based on the game object's position
-            target_x = self.gameObject.position.x-320/2/self.cam.zoom - self.cam.offset.x
-            target_y = self.gameObject.position.y-180/2/self.cam.zoom - self.cam.offset.y
+            target_x = self.gameObject.position.x-int(self.resolution.x)/2/self.cam.zoom - self.cam.offset.x
+            target_y = self.gameObject.position.y-int(self.resolution.y)/2/self.cam.zoom - self.cam.offset.y
             
             # Smoothly move the camera towards the target position
             current_x = self.cam.target.x
@@ -47,5 +48,5 @@ class camera(component):
             
             self.cam.target = Vector2(new_x, new_y)
         else:
-            self.cam.target = Vector2(self.gameObject.position.x-320/2, self.gameObject.position.y-180/2)
+            self.cam.target = Vector2(self.gameObject.position.x-int(self.resolution.x)/2, self.gameObject.position.y-int(self.resolution.y)/2)
         return super().update(dt)

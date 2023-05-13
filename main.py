@@ -16,8 +16,11 @@ import src.Engine as engine
 
 window_width = 1280
 window_height = 720
+game_width = 320
+game_height = 180
 
-init_window(window_width, window_height, "Game Engine")
+engine.init("EightBallEngine", Vector2(window_width, window_height), Vector2(game_width, game_height))
+
 main_scene = scene("Main Scene", active=True)
 
 cam_go = gameObject(main_scene, name="Camera")
@@ -37,4 +40,4 @@ def render():
 def render_without_cam():
     pass
 
-engine.run_engine(cam.cam, update, render, render_without_cam)
+engine.run_engine(cam, update, render, render_without_cam)
