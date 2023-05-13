@@ -15,6 +15,3 @@ class SCENE:
     def __init__(self, s:scene) -> None:
         self.scene:scene = s
         # ---DO EVERYTHING HERE---
-
-        square = gameObject(self.scene, name="Square", position=Vector2(0,0))
-        debugRenderer(square)
