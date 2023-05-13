@@ -4,6 +4,16 @@ from src.Component import component
 
 class camera(component):
     def __init__(self, gameObject: gameObject):
+        """
+        Initializes the camera.
+
+        Args:
+            self (camera): The camera.
+            gameObject (gameObject): The parent gameObject of the camera.
+
+        Returns:
+            None
+        """
         self.gameObject = gameObject
         self.offset = Vector2(0,0)
         self.zoom = 1
@@ -13,6 +23,16 @@ class camera(component):
         super().__init__(gameObject)
 
     def update(self, dt: float):
+        """
+        Updates the camera.
+
+        Args:
+            self (camera): The camera.
+            dt (float): The time difference since the last update.
+
+        Returns:
+            None
+        """
         if self.lerp:
             # Calculate the target position based on the game object's position
             target_x = self.gameObject.position.x-320/2/self.cam.zoom - self.cam.offset.x
