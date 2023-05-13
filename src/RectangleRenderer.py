@@ -6,7 +6,6 @@ from src.GameObject import gameObject
 class rectangleRenderer(component):
     def __init__(self,
                  gameObject: gameObject,
-                 position:Vector2=Vector2(0,0),
                  rotation:float=0,
                  name:str="Rectangle",
                  scale:Vector2=Vector2(1,1),
@@ -16,7 +15,6 @@ class rectangleRenderer(component):
                  tag:str = None):
 
         self.render_layer = render_layer
-        self.position = position
         self.rotation = rotation
         self.name = name
         self.scale = scale
