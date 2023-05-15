@@ -14,8 +14,8 @@ from src.RectangleRenderer import rectangleRenderer
 from pyray import *
 import src.Engine as engine
 
-window_width = 1280
-window_height = 720
+window_width = 720
+window_height = 520
 game_width = 320
 game_height = 180
 
@@ -28,16 +28,32 @@ cam = camera(cam_go)
 
 
 rectangle = gameObject(main_scene, name="Rect")
-rec = rectangleRenderer(rectangle, Vector2(20,20), RED)
+rec = rectangleRenderer(rectangle, scale=Vector2(20,20), Color=YELLOW)
+
+def inputs(key):
+    if (key == "W"):
+        rectangle.position.y -= 200 * get_frame_time()
+
+    if (key == "S"):
+        rectangle.position.y += 200 * get_frame_time()
+
+    if (key == "A"):
+        rectangle.position.x -= 200 * get_frame_time()
+
+    if (key == "D"):
+        rectangle.position.x += 200 * get_frame_time()
+
+
 
 def update():
-    rectangle.rotation += 10 * get_frame_time()
     main_scene.update(get_frame_time())
+    rectangle.rotation += 50 * get_frame_time()
 
 def render():
     main_scene.render()
 
+
 def render_without_cam():
     pass
 
-engine.run_engine(cam, update, render, render_without_cam)
+engine.run_engine(cam.cam, inputs, update, render, render_without_cam)
