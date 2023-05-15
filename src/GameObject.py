@@ -4,18 +4,24 @@ from src.Scene import scene
 class gameObject:
     def __init__(self,
                  scene:scene,
-                 position:Vector2=Vector2(0,0),
+                 position:Vector2=None,
                  rotation:float=0,
                  name:str="GameObject",
-                 scale:Vector2=Vector2(1,1),
+                 scale:Vector2=None,
                  active:bool=True,
                  render_layer:int=0,
                  tag:str = None):
         self.render_layer = render_layer
-        self.position = position
+        if position == None:
+            self.position = Vector2(0,0)
+        else:
+            self.position:Vector2 = position
         self.rotation = rotation
         self.name = name
-        self.scale = scale
+        if scale == None:
+            self.scale = Vector2(1,1)
+        else:
+            self.scale = scale
         self.active = active
         self.components = []
         self.scene = scene

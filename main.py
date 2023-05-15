@@ -9,15 +9,18 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
-from src.RectangleRenderer import *
+from src.RectangleRenderer import rectangleRenderer
 
 from pyray import *
 import src.Engine as engine
 
 window_width = 1280
 window_height = 720
+game_width = 320
+game_height = 180
 
-init_window(window_width, window_height, "Game Engine")
+engine.init("EightBallEngine", Vector2(window_width, window_height), Vector2(game_width, game_height))
+
 main_scene = scene("Main Scene", active=True)
 
 cam_go = gameObject(main_scene, name="Camera")
@@ -25,9 +28,10 @@ cam = camera(cam_go)
 
 
 rectangle = gameObject(main_scene, name="Rect")
-rec = RectangleObject(rectangle, position=Vector2(10, 10), scale=Vector2(20,20), active=True, tint=YELLOW)
+rec = rectangleRenderer(rectangle, Vector2(20,20), RED)
 
 def update():
+    rectangle.rotation += 10 * get_frame_time()
     main_scene.update(get_frame_time())
 
 def render():
@@ -36,4 +40,4 @@ def render():
 def render_without_cam():
     pass
 
-engine.run_engine(cam.cam, update, render, render_without_cam)
+engine.run_engine(cam, update, render, render_without_cam)
