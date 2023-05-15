@@ -18,7 +18,7 @@ class camera(component):
         self.gameObject = gameObject
         self.offset = Vector2(0,0)
         self.zoom = 1
-        self.lerp = True
+        self.lerp = False
         self.cam = Camera2D(self.offset, self.gameObject.position, self.gameObject.rotation, self.zoom)
         
         super().__init__(gameObject)

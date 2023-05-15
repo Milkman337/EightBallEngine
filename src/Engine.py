@@ -2,6 +2,10 @@ from pyray import *
 from typing import Callable
 from src.Camera import camera
 
+
+from .GlobalVars import *
+
+
 _game_name = None
 _resolution = None
 _game_resolution = None
@@ -14,12 +18,25 @@ def init(game_name: str, resolution:Vector2, game_resolution:Vector2):
 
     init_window(int(resolution.x), int(resolution.y), game_name)
 
-def run_engine(cam:camera, update, render, render_without_cam=None):
+
+
+def get_pressed_key():
+    for key in keys:
+        if is_key_down(key):
+            return keys[key]
+
+    for key in keys:
+        if is_key_released(key):
+            return str(keys[key] + " up")
+
+
+def run_engine(cam:Camera2D, inputs, update, render, render_without_cam=None):
     """
     Starts the GameEngine.
 
     Args:
         cam (camera): The camera you want to render with.\n
+        inputs (function): gets called every frame and is takes care of detecting keyboard and mouse inputs.\n
         update (function): gets called every frame and is used for logic.\n
         render (function): gets called once every frame and is used for rendering.\n
         render_without_cam (function): same as render but is not rendered with the camera. This can be used for GUI.\n
@@ -28,17 +45,21 @@ def run_engine(cam:camera, update, render, render_without_cam=None):
         None
     """
 
-    cam.resolution = _game_resolution
-
     screen = load_render_texture(int(_game_resolution.x), int(_game_resolution.y))
     while not window_should_close():
         update()
+
+
+        key_pressed = get_pressed_key()
+        if key_pressed is not None:
+            inputs(key_pressed)
+
 
         begin_drawing()
         clear_background(BLACK)
         begin_texture_mode(screen)
         clear_background(BLACK)
-        begin_mode_2d(cam.cam)
+        begin_mode_2d(cam)
 
         render()
 
