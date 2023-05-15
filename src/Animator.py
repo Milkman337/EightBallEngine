@@ -109,18 +109,58 @@ class animator(component):
                 a.mirror=1
 
     def play(self, animation_name:str):
+        """
+        Plays a specific animation by name.
+
+        Args:
+            self (animator): The animator.\n
+            animation_name (str): The name of the animation.\n
+
+        Returns:
+            None
+        """
         self.selected = animation_name
 
     def add_animation(self, speed:float, name:str):
+        """
+        Adds a new animation to the animator.
+
+        Args:
+            self (animator): The animator.
+            speed (float): Speed of the new animation.
+            name (str): The name of the new animation.
+
+        Returns:
+            None
+        """
         self.animations.append(animaton(speed, load_texture("assets/animations/"+name+".png"), self.gameObject, name))
 
     def update(self, dt: float):
+        """
+        Updates the animator.
+
+        Args:
+            self (animator): The animator.
+            dt (float): The time difference since the last update.
+
+        Returns:
+            None
+        """
         for a in self.animations:
             if a.name == self.selected:
                 a.update(dt)
         return super().update(dt)
     
     def render(self):
+        """
+        Renders the animator.
+
+        Args:
+            self (animator): The animator.
+
+        Returns:
+            None
+        """
         for a in self.animations:
             if a.name == self.selected:
                 a.render()

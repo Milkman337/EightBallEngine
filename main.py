@@ -14,8 +14,8 @@ from src.RectangleRenderer import *
 from pyray import *
 import src.Engine as engine
 
-window_width = 500
-window_height = 400
+window_width = 1280
+window_height = 720
 
 init_window(window_width, window_height, "Game Engine")
 main_scene = scene("Main Scene", active=True)
