@@ -9,6 +9,7 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
+from src.ParticleSystem import particleSystem
 from src.RectangleRenderer import rectangleRenderer
 
 from pyray import *
@@ -29,6 +30,15 @@ cam = camera(cam_go)
 
 rectangle = gameObject(main_scene, name="Rect")
 rec = rectangleRenderer(rectangle, Vector2(20,20), RED)
+
+particle_test = gameObject(main_scene, Vector2(50, 0), name="Particle")
+particleSystem(particle_test,
+               (Vector2(-30,-30), Vector2(30,30)),
+               30,
+               [RED, YELLOW, WHITE],
+               2,
+               (1,2),
+               update_rate=10)
 
 def update():
     rectangle.rotation += 10 * get_frame_time()
