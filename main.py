@@ -40,7 +40,10 @@ particleSystem(particle_test,
                (1,2),
                update_rate=1,
                render_batched=False)
-debugMovement(particle_test, 100)
+
+def inputs(key):
+    # ---ADD INPUTS HERE---
+    pass
 
 circle_particle = gameObject(main_scene, name="Circle", position=Vector2(0,0))
 c = circleSystem(circle_particle, final_radius=50, thickness_factor=1.2, speed=50)
@@ -56,4 +59,4 @@ def render():
 def render_without_cam():
     pass
 
-engine.run_engine(cam, update, render, render_without_cam)
+engine.run_engine(cam, inputs, update, render, render_without_cam)
