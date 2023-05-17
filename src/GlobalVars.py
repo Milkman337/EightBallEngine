@@ -1,4 +1,4 @@
-from pyray import *
+from raypyc import *
 
 keys = {
     KEY_NULL: "NULL",
