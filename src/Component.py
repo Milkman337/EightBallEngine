@@ -1,4 +1,4 @@
-from pyray import *
+from raypyc import *
 from src.GameObject import gameObject
 
 class component:

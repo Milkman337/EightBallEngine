@@ -1,7 +1,7 @@
 from src.Component import component
 from src.GameObject import gameObject
 
-from pyray import *
+from raypyc import *
 
 class debugRenderer(component):
     def __init__(self, gameObject: gameObject):

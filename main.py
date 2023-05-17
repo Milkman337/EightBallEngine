@@ -12,7 +12,7 @@ from src.Camera import camera
 from src.ParticleSystem import particleSystem
 from src.RectangleRenderer import rectangleRenderer
 
-from pyray import *
+from raypyc import *
 import src.Engine as engine
 
 window_width = 1280

@@ -9,7 +9,7 @@ from src.Scene import scene
 from src.Script import script
 from src.SpriteMap import spriteMap
 
-from pyray import *
+from raypyc import *
 
 class SCENE:
     def __init__(self, s:scene) -> None:

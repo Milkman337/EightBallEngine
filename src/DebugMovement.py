@@ -1,7 +1,7 @@
 from src.GameObject import gameObject
 from src.Component import component
 
-from pyray import *
+from raypyc import *
 
 class debugMovement(component):
     def __init__(self, gameObject: gameObject,

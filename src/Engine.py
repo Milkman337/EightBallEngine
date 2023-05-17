@@ -1,4 +1,4 @@
-from pyray import *
+from raypyc import *
 from typing import Callable
 from src.Camera import camera
 
@@ -12,7 +12,7 @@ def init(game_name: str, resolution:Vector2, game_resolution:Vector2):
     _resolution = resolution
     _game_resolution = game_resolution
 
-    init_window(int(resolution.x), int(resolution.y), game_name)
+    init_window(int(resolution.x), int(resolution.y), game_name.encode())
 
 def run_engine(cam:camera, update, render, render_without_cam=None):
     """

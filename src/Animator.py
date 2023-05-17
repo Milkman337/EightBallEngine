@@ -1,4 +1,4 @@
-from pyray import *
+from raypyc import *
 from src.Component import component
 from src.GameObject import gameObject
 from src.Camera import camera

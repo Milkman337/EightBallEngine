@@ -1,6 +1,6 @@
 from src.Component import component
 
-from pyray import *
+from raypyc import *
 
 from src.GameObject import gameObject
 class rectangleRenderer(component):
