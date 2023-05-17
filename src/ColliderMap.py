@@ -3,7 +3,7 @@ from src.Component import component
 from src.Collider import collider
 import simpleJDB
 
-from pyray import *
+from raypyc import *
 
 class colliderMap(component):
     def __init__(self, gameObject: gameObject,
