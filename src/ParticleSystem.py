@@ -35,7 +35,9 @@ class particleSystem(component):
                  burst:int,
                  lifetime_range:tuple[float, float] = (1,3),
                  loops:bool = True,
-                 update_rate:int = 10):
+                 update_rate:int = 10,
+                 render_batched:bool = True,
+                 batched_elements:int = 20):
 
         self.start_velocity_range = start_velocity_range
         self.gravity = gravity
@@ -45,8 +47,11 @@ class particleSystem(component):
         self.loops = loops
         self.update_rate = update_rate
         self._update_timer = update_rate
+        self.render_batched = render_batched
 
         self.particles:list[particle] = []
+
+        self.batch = rl_load_render_batch(1,batched_elements)
 
         self.spawn_timer = 1/60*self.update_rate
 
@@ -64,12 +69,12 @@ class particleSystem(component):
         self._update_timer -= 1
         if self._update_timer <= 0:
             
-
             self._update_timer = self.update_rate
             for p in self.particles:
                 p.update(dt=dt*self.update_rate)
                 if p.lifetime <= 0:
                     self.particles.remove(p)
+
 
         self.spawn_timer -= 1 * dt
         if self.spawn_timer <= 0:
@@ -86,7 +91,12 @@ class particleSystem(component):
         return super().update(dt)
     
     def render(self):
+        if self.render_batched:
+            rl_set_render_batch_active(self.batch)
         for p in self.particles:
             p.render()
+        if self.render_batched:
+            rl_draw_render_batch_active()
+            rl_set_render_batch_active(None)
 
         return super().render()

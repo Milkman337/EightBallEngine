@@ -36,9 +36,11 @@ particleSystem(particle_test,
                (Vector2(-30,-30), Vector2(30,30)),
                30,
                [RED, YELLOW, WHITE],
-               2,
+               1,
                (1,2),
-               update_rate=10)
+               update_rate=1,
+               render_batched=False)
+debugMovement(particle_test, 100)
 
 def update():
     rectangle.rotation += 10 * get_frame_time()
