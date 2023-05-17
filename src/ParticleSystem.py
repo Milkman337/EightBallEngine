@@ -150,7 +150,7 @@ class particleSystem(component):
     def render(self):
         if self.render_batched:
             rl_set_render_batch_active(self.batch)
-        for p in self.particles:
+        for p in reversed(self.particles):
             p.render()
         if self.render_batched:
             rl_draw_render_batch_active()
