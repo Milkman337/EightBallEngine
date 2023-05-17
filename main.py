@@ -9,7 +9,7 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
-from src.ParticleSystem import particleSystem
+from src.ParticleSystem import particleSystem, circleSystem
 from src.RectangleRenderer import rectangleRenderer
 
 from raypyc import *
@@ -41,6 +41,10 @@ particleSystem(particle_test,
                update_rate=1,
                render_batched=False)
 debugMovement(particle_test, 100)
+
+circle_particle = gameObject(main_scene, name="Circle", position=Vector2(0,0))
+c = circleSystem(circle_particle, final_radius=50, thickness_factor=1.2, speed=50)
+c.play()
 
 def update():
     rectangle.rotation += 10 * get_frame_time()

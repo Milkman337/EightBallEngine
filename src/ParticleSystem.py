@@ -27,6 +27,63 @@ class particle:
     def render(self):
         draw_circle(int(self.position.x), int(self.position.y), self.lifetime*3, self.color)
 
+class circleSystem(component):
+    def __init__(self, gameObject: gameObject,
+                 final_radius:float = 10,
+                 thickness_factor:float = 3,
+                 color:Color = WHITE,
+                 speed:float = 10):
+        self.final_radius = final_radius
+        self.color = color
+        self.speed = speed
+
+        self.thickness_factor = thickness_factor
+
+        self.radius = 0
+        self.secondary_radius = 0
+
+        self.running = False
+
+        self.render_texture = load_render_texture(int(final_radius*4+2), int(final_radius*4+2))
+
+        super().__init__(gameObject)
+
+    def play(self):
+        self.radius = 0
+        self.running = True
+
+    def update(self, dt:float):
+        if self.running:
+            self.radius += self.speed * dt
+            if (self.radius >= self.final_radius-self.final_radius/self.thickness_factor):
+                self.secondary_radius += self.speed * dt * self.final_radius/(self.final_radius/self.thickness_factor)
+            if self.radius >= self.final_radius:
+                self.running = False
+            begin_texture_mode(self.render_texture)
+            clear_background(Color(0, 0, 0, 0))
+            draw_circle(int(self.render_texture.texture.width/2),
+                        int(self.render_texture.texture.height/2),
+                        int(self.radius),
+                        self.color)
+            rl_set_blend_factors(0x0302, 0x0302, 0x8007)
+            rl_set_blend_mode(BlendMode.BLEND_CUSTOM)
+            draw_circle(int(self.render_texture.texture.width/2),
+                        int(self.render_texture.texture.height/2),
+                        self.secondary_radius,
+                        Color(0,0,0,0))
+            rl_set_blend_mode(BlendMode.BLEND_ALPHA)
+            end_texture_mode()
+        return super().update(dt)
+    
+    def render(self):
+        draw_texture_pro(self.render_texture.texture, 
+                         Rectangle(0,0,self.render_texture.texture.width,self.render_texture.texture.height), 
+                         Rectangle(self.gameObject.position.x,self.gameObject.position.y,self.render_texture.texture.width,self.render_texture.texture.height), 
+                         Vector2(self.render_texture.texture.width/2,self.render_texture.texture.height/2), 
+                         0, 
+                         WHITE)
+        return super().render()
+
 class particleSystem(component):
     def __init__(self, gameObject: gameObject,
                  start_velocity_range:tuple[Vector2, Vector2],

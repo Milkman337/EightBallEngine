@@ -34,9 +34,10 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
+from src.ParticleSystem import particleSystem, circleSystem
 from src.RectangleRenderer import rectangleRenderer
 
-from pyray import *
+from raypyc import *
 import src.Engine as engine
 
 window_width = 1280
@@ -55,6 +56,21 @@ cam = camera(cam_go)
 rectangle = gameObject(main_scene, name="Rect")
 rec = rectangleRenderer(rectangle, Vector2(20,20), RED)
 
+particle_test = gameObject(main_scene, Vector2(50, 0), name="Particle")
+particleSystem(particle_test,
+               (Vector2(-30,-30), Vector2(30,30)),
+               30,
+               [RED, YELLOW, WHITE],
+               1,
+               (1,2),
+               update_rate=1,
+               render_batched=False)
+debugMovement(particle_test, 100)
+
+circle_particle = gameObject(main_scene, name="Circle", position=Vector2(0,0))
+c = circleSystem(circle_particle, final_radius=50, thickness_factor=1.2, speed=50)
+c.play()
+
 def update():
     rectangle.rotation += 10 * get_frame_time()
     main_scene.update(get_frame_time())
@@ -66,6 +82,7 @@ def render_without_cam():
     pass
 
 engine.run_engine(cam, update, render, render_without_cam)
+
 ```
 
 1. You can Organize it even more by creating a scene, running the project once and then it will create a scene script. In there you can just use self.scene instead of main scene.
