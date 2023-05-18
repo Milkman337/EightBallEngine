@@ -32,7 +32,7 @@ class particle:
 class sparkSystem(component):
     def __init__(self, gameObject: gameObject,
                  spark_size:float = 0.8,
-                 spark_duration:float = 2,
+                 spark_duration:float = 3,
                  spark_length:float = 1,
                  color:Color = WHITE,
                  texture_size:int = 100,
@@ -53,6 +53,11 @@ class sparkSystem(component):
         super().__init__(gameObject)
 
     def play(self):
+        begin_texture_mode(self.texture)
+        clear_background(Color(0,0,0,0))
+        end_texture_mode()
+        self.time_till_radius = 5
+        self.radius = 0
         for i in range(self.amount):
             self.particles.append(particle(Vector2(self.texture.texture.width/2, self.texture.texture.height/2),
                                            Vector2(random.randrange(-100, 100), random.randrange(-100,100)),
@@ -105,6 +110,7 @@ class circleSystem(component):
 
     def play(self):
         self.radius = 0
+        self.secondary_radius = 0
         self.running = True
 
     def update(self, dt:float):
