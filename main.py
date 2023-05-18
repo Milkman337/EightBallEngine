@@ -9,7 +9,7 @@ from src.Collider import collider
 from src.Animator import animator
 from src.Script import script
 from src.Camera import camera
-from src.ParticleSystem import particleSystem, circleSystem
+from src.ParticleSystem import particleSystem, circleSystem, sparkSystem
 from src.RectangleRenderer import rectangleRenderer
 
 from raypyc import *
@@ -48,6 +48,10 @@ def inputs(key):
 circle_particle = gameObject(main_scene, name="Circle", position=Vector2(0,0))
 c = circleSystem(circle_particle, final_radius=50, thickness_factor=1.2, speed=50)
 c.play()
+
+sparks = gameObject(main_scene, Vector2(-10,0), name="Sparks")
+s = sparkSystem(sparks)
+s.play()
 
 def update():
     rectangle.rotation += 10 * get_frame_time()

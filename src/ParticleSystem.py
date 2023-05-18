@@ -10,22 +10,77 @@ class particle:
                  velocity:Vector2,
                  gravity:float,
                  color:Color,
-                 lifetime:float) -> None:
+                 lifetime:float,
+                 downscale_factor:float = 1) -> None:
         
         self.position = position
         self.velocity = velocity
         self.gravity = gravity
         self.color = color
         self.lifetime = lifetime
+        self.downscale_factor = downscale_factor
 
     def update(self, dt:float):
         self.position.x += self.velocity.x * dt
         self.position.y += self.velocity.y * dt
-        self.lifetime -= 1 * dt
+        self.lifetime -= self.downscale_factor * dt
         self.velocity.y += self.gravity * dt
 
     def render(self):
         draw_circle(int(self.position.x), int(self.position.y), self.lifetime*3, self.color)
+
+class sparkSystem(component):
+    def __init__(self, gameObject: gameObject,
+                 spark_size:float = 0.8,
+                 spark_duration:float = 2,
+                 spark_length:float = 1,
+                 color:Color = WHITE,
+                 texture_size:int = 100,
+                 amount:int = 6):
+        self.spark_size = spark_size
+        self.spark_duration = spark_duration
+        self.spark_length = spark_length
+        self.color = color
+        self.amount = amount
+
+        self.time_till_radius = 5
+        self.radius = 0
+
+        self.texture = load_render_texture(texture_size, texture_size)
+
+        self.particles:list[particle] = []
+
+        super().__init__(gameObject)
+
+    def play(self):
+        for i in range(self.amount):
+            self.particles.append(particle(Vector2(self.texture.texture.width/2, self.texture.texture.height/2),
+                                           Vector2(random.randrange(-100, 100), random.randrange(-100,100)),
+                                           0,
+                                           self.color,
+                                           self.spark_size,
+                                           self.spark_duration))
+
+    def update(self, dt:float):
+        self.time_till_radius -= 30 * dt
+        if self.time_till_radius <= 0:
+            self.radius += self.spark_length*100 * dt
+        begin_texture_mode(self.texture)
+        for p in self.particles:
+            p.update(dt)
+            p.render()
+        rl_set_blend_factors(0x0302, 0x0302, 0x8007)
+        rl_set_blend_mode(BlendMode.BLEND_CUSTOM)
+        draw_circle(int(self.texture.texture.width/2), int(self.texture.texture.height/2), self.radius, Color(0,0,0,0))
+        rl_set_blend_mode(BlendMode.BLEND_ALPHA)
+        end_texture_mode()
+        return super().update(dt)
+    
+    def render(self):
+        draw_texture(self.texture.texture, int(self.gameObject.position.x-self.texture.texture.width/2),
+                     int(self.gameObject.position.y-self.texture.texture.height/2),
+                     WHITE)
+        return super().render()
 
 class circleSystem(component):
     def __init__(self, gameObject: gameObject,
