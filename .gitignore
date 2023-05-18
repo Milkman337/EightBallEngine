@@ -2,4 +2,4 @@
 output/
 dist/
 build/
-main.spec
+*.spec
