@@ -53,6 +53,7 @@ class sparkSystem(component):
         super().__init__(gameObject)
 
     def play(self):
+        self.particles = []
         begin_texture_mode(self.texture)
         clear_background(Color(0,0,0,0))
         end_texture_mode()
