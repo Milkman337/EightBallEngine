@@ -7,7 +7,9 @@ _game_name = None
 _resolution = None
 _game_resolution = None
 
-def init(game_name: str, resolution:Vector2, game_resolution:Vector2):
+def init(game_name: str, resolution:Vector2, game_resolution:Vector2, fps:int=60):
+    if fps != 0:
+        set_target_fps(fps)
     global _game_name, _resolution, _game_resolution
     _game_name = game_name
     _resolution = resolution
