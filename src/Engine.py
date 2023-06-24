@@ -14,6 +14,7 @@ def init(game_name: str, resolution:Vector2, game_resolution:Vector2):
     _game_resolution = game_resolution
 
     init_window(int(resolution.x), int(resolution.y), game_name.encode())
+    init_audio_device()
 
 def get_pressed_key():
     for key in keys:
