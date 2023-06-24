@@ -8,6 +8,7 @@ class collider(component):
                  debug_render:bool=False):
         self.collision_rec = collision_rec
         self.gameObject = gameObject
+        #TODO collider adding
         self.gameObject.scene.colliders.append(self)
         self.debug_render = debug_render
         super().__init__(gameObject)
@@ -29,6 +30,7 @@ class collider(component):
         self.debug_render = data["debug_render"]
 
     def check_collision(self):
+        #TODO check for a collision
         for col in self.gameObject.scene.colliders:
             if col == self or col.gameObject == self.gameObject:
                 continue
