@@ -3,7 +3,7 @@ from src.Component import component
 from src.GameObject import gameObject
 from src.Camera import camera
 
-class animaton:
+class animator:
     def __init__(self, speed:float, texture:Texture2D, gameObject:gameObject, name:str):
         """
         Initializes the animation
